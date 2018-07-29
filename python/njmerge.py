@@ -307,7 +307,9 @@ def join_nodes_in_both_trees(tree1, nodeAinT1, cladeA,
 
     # Handle adding all of tree1 into tree 2 and vice versa!!
     if cladeAisT1 and cladeBisT2:
-        # print("Nodes are tree1 and tree2...")
+        # Join trees 1 and 2 together, i.e.,
+        # tree 1 will equal tree 2
+        # print("Joining tree1 and tree2...")
         if test:
             return [None, None]
         root = dendropy.Node()
@@ -317,7 +319,8 @@ def join_nodes_in_both_trees(tree1, nodeAinT1, cladeA,
         tree1.is_rooted = True
         tree2 = None
     elif cladeAisT1:
-        # Add all of tree 1 into tree 2
+        # Add all of tree 1 into tree 2, i.e.,
+        # tree 1 will be contained in tree 2
         # print("Add all of tree 1 into tree 2")
         if test:
             return [None, None]
@@ -330,7 +333,8 @@ def join_nodes_in_both_trees(tree1, nodeAinT1, cladeA,
         tree1.is_rooted = True
         tree2 = None
     elif cladeBisT2:
-        # Add all of tree 2 into tree 1
+        # Add all of tree 2 into tree 1, i.e.,
+        # tree will be contained in tree 1
         # print("Add all of tree 2 into tree 1")
         if test:
             return [None, None]
@@ -343,7 +347,8 @@ def join_nodes_in_both_trees(tree1, nodeAinT1, cladeA,
         tree1.is_rooted = True
         tree2 = None
     else:
-        # Make the join!
+        # Make the join, i.e.,
+        # tree 1 and tree 2 will have a shared leaf
         # print("Making join...")
         [tree1, nodeAinT1] = extract_nodes_from_split(tree1, nodeAinT1,
                                                       cladeA)
@@ -762,9 +767,6 @@ def merge_trees_via_nj(pdm, trees):
         # Update the constraint trees!
         [trees, edits] = join_nodes(trees, leaves, maps, nd1, nd2)
 
-        # TODO: Delete duplicate constraint trees, i.e.,
-        # constraint trees already on the exact same leaf set
-
         if sum(edits) > 0:
             i = 0
             for t, e in zip(trees, edits):
@@ -772,11 +774,44 @@ def merge_trees_via_nj(pdm, trees):
                     # Check to see if you can quit early
                     leaves[i] = get_leaf_set(t)
                     if leaves[i] == full_leaf_set:
+                        # print("Able to quit early!")
                         return t
 
                     # Update split-to-node maps
                     maps[i] = map_splits_to_nodes(t)
                 i = i + 1
+
+        # Delete duplicate constraint trees, i.e.,
+        # constraint trees already on the exact same leaf set
+        delete = False
+        for i, li in enumerate(leaves[:-1]):
+            j = i + 1
+            for lj in leaves[j:]:
+                # print("i=%d j=%d" % (i,j))
+                if li == lj:
+                    print("Tree %d equals %d" % (i, j))
+                    delete = True
+                    del trees[j]
+                    del maps[j]
+                    del leaves[j]
+                    break
+                elif li.issubset(lj):
+                    print("Tree %d contained in %d" % (i, j))
+                    delete = True
+                    del trees[i]
+                    del maps[i]
+                    del leaves[i]
+                    break
+                elif lj.issubset(li):
+                    print("Tree %d contained in %d" % (j, i))
+                    delete = True
+                    del trees[j]
+                    del maps[j]
+                    del leaves[j]
+                    break
+                j = j + 1
+        if delete:
+            print("%d constraint trees left!" % len(trees))
 
         # Create the new node - taken from dendropy
         new_node = tree.node_factory()
