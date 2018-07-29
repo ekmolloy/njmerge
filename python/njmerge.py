@@ -781,8 +781,7 @@ def merge_trees_via_nj(pdm, trees):
                     maps[i] = map_splits_to_nodes(t)
                 i = i + 1
 
-        # Delete duplicate constraint trees, i.e.,
-        # constraint trees already on the exact same leaf set
+        # Delete duplicate constraint trees
         delete = False
         for i, li in enumerate(leaves[:-1]):
             j = i + 1
