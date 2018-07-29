@@ -14,10 +14,10 @@ python ../../python/njmerge.py \
 ```
 
 Note that 
-+ (distance.mat)[`distance.mat`] is a distance matrix in PHYLIP format on the full taxon set
-+ `distance.mat_taxlist` is the taxon name corresponding to each row in the distance matrix
-+ `subset-1-outof-5.tre` is a constraint tree on a subset of taxa; all subset trees need to be on *disjoint* subsets of taxa
-+ njmerge.tre is the output file, i.e., taxa cannot appear in more than one subset tree
++ [`distance.mat`](distance.mat) is a distance matrix in PHYLIP format on the full taxon set
++ [`distance.mat_taxlist`](distance.mat_taxlist) is the taxon name corresponding to each row in the distance matrix
++ [`subset-1-outof-5.tre`](subset-1-outof-5.tre) is the first of five constraint trees; all constraint trees need to be on *disjoint* subsets of taxa, i.e., taxa cannot appear in more than one subset tree
++ njmerge.tre is the output file
 
 Now check that the output of NJMerge obeys the constraint trees, using the following commands:
 ```
