@@ -762,6 +762,9 @@ def merge_trees_via_nj(pdm, trees):
         # Update the constraint trees!
         [trees, edits] = join_nodes(trees, leaves, maps, nd1, nd2)
 
+        # TODO: Delete duplicate constraint trees, i.e.,
+        # constraint trees already on the exact same leaf set
+
         if sum(edits) > 0:
             i = 0
             for t, e in zip(trees, edits):
