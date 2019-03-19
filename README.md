@@ -1,6 +1,6 @@
 NJMerge
 =======
-NJMerge is a tool for scaling phylogengy estimation methods to large datasets. NJMerge can be used in a divide-and-conquer framework as follows: 1) divide the species set into disjoint subsets, 2) construct trees on each subset, and 3) combine the subset trees using an associated distance matrix (on the full species set). NJMerge has been sucessfully tested in the context of species tree estimation (Molloy and Warnow, 2018).
+NJMerge is a tool for scaling phylogengy estimation methods to large datasets. NJMerge can be used in a divide-and-conquer framework as follows: 1) divide the species set into disjoint subsets, 2) construct trees on each subset, and 3) combine the subset trees using an associated distance matrix (on the full species set). NJMerge has been sucessfully tested in the context of species tree estimation [(Molloy and Warnow, 2018)](https://doi.org/10.1007/978-3-030-00834-5_15).
 
 REQUIREMENTS
 ------------
