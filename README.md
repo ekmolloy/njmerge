@@ -19,10 +19,11 @@ CITATION
     editor={Mathieu Blanchette and A{\''{i}}da Ouangraoua},
     title={{NJMerge: A generic technique for scaling phylogeny estimation methods and its application to species trees}},
     booktitle="Comparative Genomics. RECOMB-CG 2018. Lecture Notes in Computer Science},
+    volume={11183},
     year={2018},
     publisher={Springer International Publishing},
     address={Cham}
-    note={To appear}
+    doi={10.1007/978-3-030-00834-5\_15}
 }
 ```
 
